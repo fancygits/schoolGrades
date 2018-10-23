@@ -21,6 +21,7 @@ public class WeightedGrade extends GradeDecorator {
 		this.weight = weight;
 	}
 	
+	@Override
 	public double getValue() {
 		return baseGrade.getValue() * this.weight;
 	}

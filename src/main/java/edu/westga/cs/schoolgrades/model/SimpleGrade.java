@@ -33,6 +33,7 @@ public class SimpleGrade implements Grade {
 	 * Returns the value of the SimpleGrade
 	 * @see edu.westga.cs.schoolgrades.model.Grade#getValue()
 	 */
+	@Override
 	public double getValue() {
 		return this.value;
 	}
