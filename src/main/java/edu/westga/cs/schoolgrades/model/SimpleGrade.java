@@ -1,4 +1,4 @@
-package edu.westga.cs.schoolgrades;
+package edu.westga.cs.schoolgrades.model;
 
 /**
  * Defines the SimpleGrade class
@@ -12,9 +12,13 @@ public class SimpleGrade implements Grade {
 	
 	/**
 	 * Constructs a new SimpleGrade object set to a value
-	 * @param value	The Grade value
+	 * @param value		The Grade value
+	 * Precondition:	value >= 0
 	 */
 	public SimpleGrade(double value) {
+		if (value < 0) {
+			throw new IllegalArgumentException("SimpleGrade value must be greater than zero.");
+		}
 		this.value = value;
 	}
 	
@@ -27,7 +31,7 @@ public class SimpleGrade implements Grade {
 	
 	/**
 	 * Returns the value of the SimpleGrade
-	 * @see edu.westga.cs.schoolgrades.Grade#getValue()
+	 * @see edu.westga.cs.schoolgrades.model.Grade#getValue()
 	 */
 	public double getValue() {
 		return this.value;

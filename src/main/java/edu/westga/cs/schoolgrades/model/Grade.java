@@ -1,4 +1,4 @@
-package edu.westga.cs.schoolgrades;
+package edu.westga.cs.schoolgrades.model;
 
 /**
  * Defines the Grade interface
