@@ -20,6 +20,10 @@ public class CompositeGrade implements Grade {
 		this.gradeList.add(grade);
 	}
 	
+	public CompositeGrade() {
+		this.gradeList = new ArrayList<Grade>();
+	}
+	
 	public void addGrade(Grade grade) {
 		if (grade == null) {
 			throw new IllegalArgumentException("Grades cannot be null");
