@@ -39,6 +39,19 @@ public class TestWeightedGradeConstructor {
 	}
 	
 	@Test
+	public void shouldAddWeightToCompositeGrade() {
+		CompositeGrade project = new CompositeGrade();
+		SimpleGrade part1 = new SimpleGrade(90);
+		project.addGrade(part1);
+		CompositeGrade part2 = new CompositeGrade(new SimpleGrade(100));
+		project.addGrade(part2);
+		part2.addGrade(new SimpleGrade(75));
+		part2.addGrade(new SimpleGrade(35));
+		WeightedGrade modifiedProject = new WeightedGrade(project, 0.5);
+		assertEquals(150, modifiedProject.getValue());
+	}
+	
+	@Test
 	public void shouldNotAllowNullGrades() {
 		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(null, 1));
 	}

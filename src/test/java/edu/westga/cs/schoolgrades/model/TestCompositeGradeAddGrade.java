@@ -60,6 +60,19 @@ class TestCompositeGradeAddGrade {
 	}
 	
 	@Test
+	void shouldAddAWeightedGrade() {
+		CompositeGrade project = new CompositeGrade();
+		WeightedGrade part1 = new WeightedGrade(new SimpleGrade(90), 2);
+		SimpleGrade part2 = new SimpleGrade(100);
+		project.addGrade(part1);
+		project.addGrade(part2);
+		assertEquals(280, project.getValue());
+		assertEquals(180, project.getGrade(0).getValue());
+		assertEquals(100, project.getGrade(1).getValue());
+		assertThrows(IndexOutOfBoundsException.class, () -> project.getGrade(2));
+	}
+	
+	@Test
 	void shouldNotAddNullGrade() {
 		CompositeGrade containsOne = new CompositeGrade(new SimpleGrade(10));
 		assertThrows(IllegalArgumentException.class, () -> containsOne.addGrade(null));
