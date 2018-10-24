@@ -12,8 +12,9 @@ public class CompositeGrade implements Grade {
 
 	private ArrayList<Grade> gradeList;
 	
-	public CompositeGrade() {
+	public CompositeGrade(Grade grade) {
 		this.gradeList = new ArrayList<Grade>();
+		this.gradeList.add(grade);
 	}
 	
 	public void addGrade(Grade grade) {
@@ -31,7 +32,9 @@ public class CompositeGrade implements Grade {
 	@Override
 	public double getValue() {
 		double value = 0;
-		
+		for (Grade grade : this.gradeList) {
+			value += grade.getValue();
+		}
 		return value;
 	}
 
