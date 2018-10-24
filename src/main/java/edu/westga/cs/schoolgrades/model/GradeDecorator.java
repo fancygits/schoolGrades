@@ -11,6 +11,9 @@ public abstract class GradeDecorator implements Grade {
 	protected Grade baseGrade;
 	
 	public GradeDecorator(Grade newGrade) {
+		if (newGrade == null) {
+			throw new IllegalArgumentException("Grades cannot be null");
+		}
 		this.baseGrade = newGrade;
 	}
 	

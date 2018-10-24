@@ -39,6 +39,11 @@ public class TestWeightedGradeConstructor {
 	}
 	
 	@Test
+	public void shouldNotAllowNullGrades() {
+		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(null, 1));
+	}
+	
+	@Test
 	public void shouldNotAllowNegativeGrades() {
 		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(-43), 7));
 		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(-0.5), 4));

@@ -1,6 +1,7 @@
 package edu.westga.cs.schoolgrades.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -34,5 +35,10 @@ class TestGradeDecoratorGetValue {
 	void shouldReturn0() {
 		GradeDecoratorTester newGDTester = new GradeDecoratorTester(new SimpleGrade());
 		assertEquals(0, newGDTester.getValue());
+	}
+	
+	@Test
+	void shouldNotAllowNull() {
+		assertThrows(IllegalArgumentException.class, () -> new GradeDecoratorTester(null));
 	}
 }
