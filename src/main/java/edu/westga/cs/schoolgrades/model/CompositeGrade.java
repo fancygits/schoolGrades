@@ -38,6 +38,9 @@ public class CompositeGrade implements Grade {
 	}
 	
 	public void setGradingStrategy(CompositeGradingStrategy strategy) {
+		if (strategy == null) {
+			throw new IllegalArgumentException("Strategy cannot be null");
+		}
 		this.gradingStrategy = strategy;
 	}
 	

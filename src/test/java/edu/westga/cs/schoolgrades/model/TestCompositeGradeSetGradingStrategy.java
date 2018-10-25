@@ -45,5 +45,13 @@ class TestCompositeGradeSetGradingStrategy {
 		emptyGrade.setGradingStrategy(new SumGradingStrategy());
 		assertThrows(IllegalArgumentException.class, () -> emptyGrade.getValue());
 	}
+	
+	@Test
+	void cannotUseNullStrategy() {
+		CompositeGrade threeGrades = new CompositeGrade(new SimpleGrade(20));
+		threeGrades.addGrade(new SimpleGrade(50));
+		threeGrades.addGrade(new SimpleGrade(30));
+		assertThrows(IllegalArgumentException.class, () -> threeGrades.setGradingStrategy(null));
+	}
 
 }
