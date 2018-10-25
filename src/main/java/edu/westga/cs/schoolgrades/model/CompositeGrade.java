@@ -11,17 +11,19 @@ import java.util.ArrayList;
 public class CompositeGrade implements Grade {
 
 	private ArrayList<Grade> gradeList;
+	private CompositeGradingStrategy gradingStrategy;
 	
 	public CompositeGrade(Grade grade) {
+		this();
 		if (grade == null) {
 			throw new IllegalArgumentException("Grades cannot be null");
 		}
-		this.gradeList = new ArrayList<Grade>();
 		this.gradeList.add(grade);
 	}
 	
 	public CompositeGrade() {
 		this.gradeList = new ArrayList<Grade>();
+		this.gradingStrategy = new SumGradingStrategy();
 	}
 	
 	public void addGrade(Grade grade) {
@@ -37,11 +39,7 @@ public class CompositeGrade implements Grade {
 	
 	@Override
 	public double getValue() {
-		double value = 0;
-		for (Grade grade : this.gradeList) {
-			value += grade.getValue();
-		}
-		return value;
+		return gradingStrategy.calculateGrade(this.gradeList);
 	}
 
 }
