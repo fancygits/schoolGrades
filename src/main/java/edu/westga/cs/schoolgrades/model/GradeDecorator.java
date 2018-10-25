@@ -18,8 +18,6 @@ public abstract class GradeDecorator implements Grade {
 	}
 	
 	@Override
-	public double getValue() {
-		return this.baseGrade.getValue();
-	}
+	public abstract double getValue();
 
 }
