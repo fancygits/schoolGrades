@@ -37,6 +37,10 @@ public class CompositeGrade implements Grade {
 		return (Grade) this.gradeList.get(gradeIndex);
 	}
 	
+	public void setGradingStrategy(CompositeGradingStrategy strategy) {
+		this.gradingStrategy = strategy;
+	}
+	
 	@Override
 	public double getValue() {
 		return gradingStrategy.calculateGrade(this.gradeList);
