@@ -10,7 +10,14 @@ import java.util.ArrayList;
  */
 public interface CompositeGradingStrategy {
 	
-	public double calculateGrade(ArrayList<Grade> grades);
+	/**
+	 * Calculates the Value of the CompositeGrade based on the
+	 * concrete CompositeGradingStrategy object
+	 * 
+	 * @param grades	The gradeList of the CompositeGrade
+	 * @return			The total value of all Grades contained
+	 */
+	double calculateGrade(ArrayList<Grade> grades);
 	
 }
 

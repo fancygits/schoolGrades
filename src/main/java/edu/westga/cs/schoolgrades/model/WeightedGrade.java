@@ -11,7 +11,9 @@ public class WeightedGrade extends GradeDecorator {
 	private double weight;
 	
 	/**
-	 * @param newGrade
+	 * Constructs a new WeightedGrade object
+	 * @param newGrade	The grade to apply weight to
+	 * @param weight	The weight to apply to the grade
 	 */
 	public WeightedGrade(Grade newGrade, double weight) {
 		super(newGrade);
@@ -23,7 +25,7 @@ public class WeightedGrade extends GradeDecorator {
 	
 	@Override
 	public double getValue() {
-		return baseGrade.getValue() * this.weight;
+		return getBaseGrade().getValue() * this.weight;
 	}
 
 }

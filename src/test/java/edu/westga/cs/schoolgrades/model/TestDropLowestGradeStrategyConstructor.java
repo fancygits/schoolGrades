@@ -66,8 +66,8 @@ class TestDropLowestGradeStrategyConstructor {
 		doubles.addGrade(new SimpleGrade(24.123));
 		doubles.addGrade(new SimpleGrade(45.1));
 		doubles.addGrade(new SimpleGrade(99.99));
-		doubles.setGradingStrategy(new DropLowestGradeStrategy(new SumGradingStrategy()));
-		assertEquals(279.96, doubles.getValue());
+		doubles.setGradingStrategy(new DropLowestGradeStrategy(new AverageGradingStrategy()));
+		assertEquals(69.99, doubles.getValue(), 0.01);
 	}
 	
 	@Test

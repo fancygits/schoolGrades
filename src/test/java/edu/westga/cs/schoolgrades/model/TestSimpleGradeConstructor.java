@@ -11,40 +11,37 @@ import org.junit.jupiter.api.Test;
  * @author James Luke Johnson
  * @version 2018.10.22
  */
-public class TestSimpleGradeConstructor {
-
+class TestSimpleGradeConstructor {
 
 	@Test
-	public void shouldSetValueTo100() {
+	void shouldSetValueTo100() {
 		SimpleGrade perfectScore = new SimpleGrade(100);
 		assertEquals(100, perfectScore.getValue());
 	}
 	
 	@Test
-	public void shouldSetValueTo87() {
+	void shouldSetValueTo87() {
 		SimpleGrade bScore = new SimpleGrade(87.12);
 		assertEquals(87.12, bScore.getValue());
 	}
 	
 	@Test
-	public void shouldSetValueTo32() {
+	void shouldSetValueTo32() {
 		SimpleGrade failingScore = new SimpleGrade(32.6);
 		assertEquals(32.6, failingScore.getValue());
 	}
 
 	@Test
-	public void shouldSetValueTo0() {
+	void shouldSetValueTo0() {
 		SimpleGrade missingScore = new SimpleGrade();
 		assertEquals(0, missingScore.getValue());
 	}
 	
 	@Test
-	public void shouldNotAllowNegativeValues() {
+	void shouldNotAllowNegativeValues() {
 		assertThrows(IllegalArgumentException.class, () -> new SimpleGrade(-34));
 		assertThrows(IllegalArgumentException.class, () -> new SimpleGrade(-1.9));
 		assertThrows(IllegalArgumentException.class, () -> new SimpleGrade(-0.1));
 		assertThrows(IllegalArgumentException.class, () -> new SimpleGrade(-100));
 	}
-
-
 }

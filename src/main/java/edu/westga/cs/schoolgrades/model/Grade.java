@@ -8,6 +8,10 @@ package edu.westga.cs.schoolgrades.model;
  */
 public interface Grade {
 
-	public double getValue();
+	/**
+	 * Gets the value of the Grade object
+	 * @return	The point value of the Grade
+	 */
+	double getValue();
 	
 }
