@@ -15,13 +15,7 @@ public class AverageGradingStrategy implements CompositeGradingStrategy {
 		if (grades.size() == 0 || grades == null) {
 			throw new IllegalArgumentException("There are no grades to calculate.");
 		}
-		double value = 0;
-		int count = 0;
-		for (Grade grade : grades) {
-			value += grade.getValue();
-			count++;
-		}
-		return value / count;
+		return new SumGradingStrategy().calculateGrade(grades) / grades.size();
 	}
 
 }
