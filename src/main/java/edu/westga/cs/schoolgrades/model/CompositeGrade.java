@@ -42,6 +42,9 @@ public class CompositeGrade implements Grade {
 		if (grade == null) {
 			throw new IllegalArgumentException("Grades cannot be null");
 		}
+		if (this.gradeList.contains(grade)) {
+			throw new IllegalArgumentException("Cannot add the same grade twice");
+		}
 		this.gradeList.add(grade);
 	}
 	

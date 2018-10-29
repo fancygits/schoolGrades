@@ -21,13 +21,13 @@ class TestWeightedGradeConstructor {
 
 	@Test
 	void shouldReturnValueOf200() {
-		Grade doubleGrade = new WeightedGrade(new SimpleGrade(100), 2);
-		assertEquals(200, doubleGrade.getValue());
+		Grade doubleGrade = new WeightedGrade(new SimpleGrade(100), .4);
+		assertEquals(40, doubleGrade.getValue());
 	}
 	
 	@Test
 	void shouldReturnValuesOf0WhenGradeIsZero() {
-		Grade zeroGrade = new WeightedGrade(new SimpleGrade(), 7);
+		Grade zeroGrade = new WeightedGrade(new SimpleGrade(), .7);
 		assertEquals(0, zeroGrade.getValue());
 	}
 	
@@ -57,17 +57,25 @@ class TestWeightedGradeConstructor {
 	
 	@Test
 	void shouldNotAllowNegativeGrades() {
-		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(-43), 7));
-		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(-0.5), 4));
-		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(-100), 1));
+		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(-43), .7));
+		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(-0.5), .4));
+		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(-100), .1));
 		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(-1), 0));
 	}
 	
 	@Test
 	void shouldNotAllowNegativeWeights() {
-		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(43), -7));
-		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(0.5), -4));
-		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(100), -1));
+		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(43), -.7));
+		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(0.5), -.4));
+		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(100), -.1));
 		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(1), -0.2));
+	}
+	
+	@Test
+	void shouldNotAllowWeightsGreaterThan1() {
+		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(43), 7));
+		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(0.5), 4));
+		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(100), 1.1));
+		assertThrows(IllegalArgumentException.class, () -> new WeightedGrade(new SimpleGrade(1), 2));
 	}
 }
