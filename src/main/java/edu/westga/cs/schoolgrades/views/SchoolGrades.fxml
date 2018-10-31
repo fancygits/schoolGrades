@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.input.KeyCodeCombination?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+
+<AnchorPane minHeight="200.0" minWidth="300.0" prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar layoutX="13.0" layoutY="13.0" prefHeight="25.0" prefWidth="374.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0">
+        <menus>
+          <Menu fx:id="dataMenu" text="_Data">
+            <items>
+              <MenuItem text="Add _quiz" />
+                  <MenuItem text="Add _homework" />
+                  <MenuItem text="Add _exam" />
+            </items>
+               <accelerator>
+                  <KeyCodeCombination alt="DOWN" code="D" control="UP" meta="UP" shift="UP" shortcut="UP" />
+               </accelerator>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <GridPane hgap="10.0" layoutX="15.0" layoutY="54.0" prefHeight="250.0" AnchorPane.bottomAnchor="13.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="13.0" AnchorPane.topAnchor="40.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" percentWidth="33.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" percentWidth="34.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="50.0" percentWidth="33.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="NEVER" />
+            <RowConstraints minHeight="75.0" prefHeight="150.0" vgrow="ALWAYS" />
+            <RowConstraints fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="NEVER" />
+            <RowConstraints fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="30.0" vgrow="NEVER" />
+            <RowConstraints fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="35.0" valignment="CENTER" vgrow="NEVER" />
+         </rowConstraints>
+         <children>
+            <Label text="Quizzes" />
+            <Label text="Exams" GridPane.columnIndex="2" />
+            <ListView accessibleText="Exam Grades List" minWidth="30.0" prefHeight="150.0" prefWidth="110.0" GridPane.columnIndex="2" GridPane.rowIndex="1">
+               <tooltip>
+                  <Tooltip text="Column for Exam Grades" />
+               </tooltip></ListView>
+            <Label text="Quiz Subtotal" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <TextField accessibleText="Quiz Subtotal" editable="false" text="0" GridPane.rowIndex="3">
+               <tooltip>
+                  <Tooltip text="Quiz Subtotal" />
+               </tooltip></TextField>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="32.0" layoutY="182.0" text="HW Subtotal" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <TextField accessibleText="Homework Subtotal" editable="false" layoutX="10.0" layoutY="202.0" text="0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+               <tooltip>
+                  <Tooltip text="Homework Subtotal" />
+               </tooltip></TextField>
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="163.0" layoutY="182.0" text="Exam Subtotal" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <TextField accessibleText="Exam Subtotal" editable="false" text="0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+               <tooltip>
+                  <Tooltip text="Exam Subtotal" />
+               </tooltip></TextField>
+            <HBox alignment="CENTER_RIGHT" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <children>
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" minWidth="-Infinity" prefHeight="25.0" prefWidth="70.0" text="Final Grade: " HBox.hgrow="NEVER" />
+                  <TextField accessibleText="Final Grade" editable="false" minWidth="50.0" HBox.hgrow="ALWAYS">
+                     <tooltip>
+                        <Tooltip text="Final Grade" />
+                     </tooltip>
+                  </TextField>
+               </children>
+            </HBox>
+            <Button accessibleText="Recalculate the Final Grade" minWidth="30.0" mnemonicParsing="false" prefWidth="110.0" text="Recalculate" textOverrun="CLIP" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="4" />
+            <ListView accessibleText="Quiz Grades List" editable="true" minWidth="30.0" prefHeight="150.0" prefWidth="110.0" GridPane.rowIndex="1">
+               <tooltip>
+                  <Tooltip text="Column for Quiz Grades" />
+               </tooltip>
+            </ListView>
+            <Label alignment="CENTER" contentDisplay="BOTTOM" text="Homeworks" GridPane.columnIndex="1" />
+            <ListView accessibleText="Homework Grades List" minWidth="30.0" prefHeight="150.0" prefWidth="130.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+               <tooltip>
+                  <Tooltip text="Column for Homework Grades" />
+               </tooltip>
+            </ListView>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>
