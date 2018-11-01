@@ -33,8 +33,6 @@ public class DropLowestGradeStrategy extends StrategyDecorator {
 		ArrayList<Grade> tempGrades = (ArrayList<Grade>) grades.clone();
 		if (grades.size() > 1) {
 			tempGrades.remove(Collections.min(tempGrades, Comparator.comparing(g -> g.getValue())));
-		} else {
-			throw new UnsupportedOperationException("CompositeGrade must contain more than 1 grade to drop the lowest grade.");
 		}
 		return getBaseStrategy().calculateGrade(tempGrades);
 	}
