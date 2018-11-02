@@ -6,6 +6,7 @@ import edu.westga.cs.schoolgrades.model.DropLowestGradeStrategy;
 import edu.westga.cs.schoolgrades.model.Grade;
 import edu.westga.cs.schoolgrades.model.SimpleGrade;
 import edu.westga.cs.schoolgrades.model.SumGradingStrategy;
+import edu.westga.cs.schoolgrades.model.WeightedGrade;
 import edu.westga.cs.schoolgrades.views.GradeCellFactory;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -39,13 +40,14 @@ public class SchoolGradesController {
 	@FXML
 	private Menu dataMenu;
 	
+	private CompositeGrade quizGrades;
+	private CompositeGrade homeworkGrades;
+	private CompositeGrade examGrades;
+	private CompositeGrade finalGrade;
 	private DoubleProperty quizProperty;
 	private DoubleProperty homeworkProperty;
 	private DoubleProperty examProperty;
 	private DoubleProperty finalGradeProperty;
-	private CompositeGrade quizGrades;
-	private CompositeGrade homeworkGrades;
-	private CompositeGrade examGrades;
 	
 	/**
 	 * Constructs the GUI controller
@@ -60,6 +62,10 @@ public class SchoolGradesController {
 		this.quizProperty = new SimpleDoubleProperty(0);
 		this.homeworkProperty = new SimpleDoubleProperty(0);
 		this.examProperty = new SimpleDoubleProperty(0);
+		this.finalGrade = new CompositeGrade();
+		this.finalGrade.addGrade(new WeightedGrade(this.quizGrades, 0.2));
+		this.finalGrade.addGrade(new WeightedGrade(this.homeworkGrades, 0.3));
+		this.finalGrade.addGrade(new WeightedGrade(this.examGrades, 0.5));
 		this.finalGradeProperty = new SimpleDoubleProperty(0);
 		this.addDummyGrades();
 	}
@@ -79,15 +85,24 @@ public class SchoolGradesController {
 		this.quizzes.setItems(this.quizGrades.getGrades());
 		this.homeworks.setItems(this.homeworkGrades.getGrades());
 		this.exams.setItems(this.examGrades.getGrades());
+		this.quizzes.setEditable(true);
+		this.homeworks.setEditable(true);
+		this.exams.setEditable(true);
 		this.recalculate();
 	}
 	
-	@FXML
 	private void addDummyGrades() {
 		this.quizGrades.addGrade(new SimpleGrade(0));
 		this.quizGrades.addGrade(new SimpleGrade(10));
-		this.homeworkGrades.addGrade(new SimpleGrade(50));
-		this.examGrades.addGrade(new SimpleGrade(30));
+		this.homeworkGrades.addGrade(new SimpleGrade(100));
+		this.homeworkGrades.addGrade(new SimpleGrade(80));
+		this.homeworkGrades.addGrade(new SimpleGrade(60));
+		this.homeworkGrades.addGrade(new SimpleGrade(40));
+		this.homeworkGrades.addGrade(new SimpleGrade(20));
+		this.examGrades.addGrade(new SimpleGrade(99));
+		this.examGrades.addGrade(new SimpleGrade(67));
+		this.examGrades.addGrade(new SimpleGrade(73));
+		this.examGrades.addGrade(new SimpleGrade(88));
 	}
 	
 	@FXML
@@ -95,6 +110,7 @@ public class SchoolGradesController {
 		this.quizProperty.set(this.quizGrades.getValue());
 		this.homeworkProperty.set(this.homeworkGrades.getValue());
 		this.examProperty.set(this.examGrades.getValue());
+		this.finalGradeProperty.set(this.finalGrade.getValue());
 	}
 	
 }

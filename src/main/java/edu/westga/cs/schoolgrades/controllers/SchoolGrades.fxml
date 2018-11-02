@@ -91,7 +91,7 @@
                   </TextField>
                </children>
             </HBox>
-            <Button accessibleText="Recalculate the Final Grade" minWidth="30.0" mnemonicParsing="false" prefWidth="110.0" text="Recalculate" textOverrun="CLIP" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="4" />
+            <Button accessibleText="Recalculate the Final Grade" minWidth="30.0" mnemonicParsing="false" onAction="#recalculate" prefWidth="110.0" text="Recalculate" textOverrun="CLIP" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="4" />
          </children>
       </GridPane>
    </children>
