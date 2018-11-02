@@ -82,12 +82,10 @@ public class SchoolGradesController {
 		this.quizzes.setCellFactory(new GradeCellFactory());
 		this.homeworks.setCellFactory(new GradeCellFactory());
 		this.exams.setCellFactory(new GradeCellFactory());
-		this.quizzes.setItems(this.quizGrades.getGrades());
-		this.homeworks.setItems(this.homeworkGrades.getGrades());
-		this.exams.setItems(this.examGrades.getGrades());
 		this.quizzes.setEditable(true);
 		this.homeworks.setEditable(true);
 		this.exams.setEditable(true);
+		this.setColumns();
 		this.recalculate();
 	}
 	
@@ -105,6 +103,12 @@ public class SchoolGradesController {
 		this.examGrades.addGrade(new SimpleGrade(88));
 	}
 	
+	private void setColumns() {
+		this.quizzes.setItems(this.quizGrades.getGrades());
+		this.homeworks.setItems(this.homeworkGrades.getGrades());
+		this.exams.setItems(this.examGrades.getGrades());
+	}
+	
 	@FXML
 	private void recalculate() {
 		this.quizProperty.set(this.quizGrades.getValue());
@@ -112,5 +116,18 @@ public class SchoolGradesController {
 		this.examProperty.set(this.examGrades.getValue());
 		this.finalGradeProperty.set(this.finalGrade.getValue());
 	}
+	
+	@FXML
+	private void addQuizGrade() {
+		this.quizGrades.addGrade(new SimpleGrade(0));
+		this.setColumns();
+	}
+	
+	//TODO addHomeworkGrade
+	
+	//TODO addExamGrade
+	
+	//TODO look into having new Grade be selected and editing
+	
 	
 }

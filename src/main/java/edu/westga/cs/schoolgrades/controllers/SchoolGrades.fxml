@@ -22,7 +22,7 @@
         <menus>
           <Menu fx:id="dataMenu" text="_Data">
             <items>
-              <MenuItem onAction="#initialize" text="Add _quiz" />
+              <MenuItem onAction="#addQuizGrade" text="Add _quiz" />
                   <MenuItem text="Add _homework" />
                   <MenuItem text="Add _exam" />
             </items>
