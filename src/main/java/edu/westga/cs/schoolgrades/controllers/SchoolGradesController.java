@@ -1,5 +1,7 @@
 package edu.westga.cs.schoolgrades.controllers;
 
+import java.math.BigDecimal;
+
 import edu.westga.cs.schoolgrades.model.AverageGradingStrategy;
 import edu.westga.cs.schoolgrades.model.CompositeGrade;
 import edu.westga.cs.schoolgrades.model.DropLowestGradeStrategy;
@@ -9,6 +11,7 @@ import edu.westga.cs.schoolgrades.model.SumGradingStrategy;
 import edu.westga.cs.schoolgrades.model.WeightedGrade;
 import edu.westga.cs.schoolgrades.views.GradeCellFactory;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
@@ -75,10 +78,10 @@ public class SchoolGradesController {
 	 */
 	@FXML
 	private void initialize() {
-		this.quizSubtotalField.textProperty().bind(this.quizProperty.asString());
-		this.homeworkSubtotalField.textProperty().bind(this.homeworkProperty.asString());
-		this.examSubtotalField.textProperty().bind(this.examProperty.asString());
-		this.finalGradeField.textProperty().bind(this.finalGradeProperty.asString());
+		this.quizSubtotalField.textProperty().bind(this.quizProperty.asString("%.3f"));
+		this.homeworkSubtotalField.textProperty().bind(this.homeworkProperty.asString("%.3f"));
+		this.examSubtotalField.textProperty().bind(this.examProperty.asString("%.3f"));
+		this.finalGradeField.textProperty().bind(this.finalGradeProperty.asString("%.3f"));
 		this.quizzes.setCellFactory(new GradeCellFactory());
 		this.homeworks.setCellFactory(new GradeCellFactory());
 		this.exams.setCellFactory(new GradeCellFactory());
@@ -119,15 +122,27 @@ public class SchoolGradesController {
 	
 	@FXML
 	private void addQuizGrade() {
+		int newIndex = this.quizGrades.getGrades().size();
 		this.quizGrades.addGrade(new SimpleGrade(0));
 		this.setColumns();
+		this.quizzes.getSelectionModel().select(newIndex);
 	}
 	
-	//TODO addHomeworkGrade
-	
-	//TODO addExamGrade
-	
+	@FXML
+	private void addHomeworkGrade() {
+		int newIndex = this.homeworkGrades.getGrades().size();
+		this.homeworkGrades.addGrade(new SimpleGrade(0));
+		this.setColumns();
+		this.homeworks.getSelectionModel().select(newIndex);
+	}	
+
+	@FXML
+	private void addExamGrade() {
+		int newIndex = this.examGrades.getGrades().size();
+		this.examGrades.addGrade(new SimpleGrade(0));
+		this.setColumns();
+		this.exams.getSelectionModel().select(newIndex);
+	}
 	//TODO look into having new Grade be selected and editing
-	
 	
 }

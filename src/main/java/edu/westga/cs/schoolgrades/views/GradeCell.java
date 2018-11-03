@@ -25,12 +25,12 @@ public class GradeCell extends ListCell<Grade> {
         this.textField.addEventFilter(KeyEvent.KEY_PRESSED, e -> {
             if (e.getCode() == KeyCode.ESCAPE) {
                 this.cancelEdit();
-            }
+            } 
         });
         this.textField.setOnAction(e -> {
         	try {
         		((SimpleGrade) getItem()).setValue(Double.parseDouble(this.textField.getText()));
-        		setText(this.textField.getText());
+        		setText(this.getGradeText());
         		setContentDisplay(ContentDisplay.TEXT_ONLY);
         	} catch (NumberFormatException nfe) {
         		this.cancelEdit();
@@ -45,10 +45,10 @@ public class GradeCell extends ListCell<Grade> {
         if (empty || grade == null) {
             setText(null);
         } else {
-            setText(grade.getValue() + "");
+            setText(this.getGradeText());
         }
         if (isEditing()) {
-            this.textField.setText(grade.getValue() + "");
+            this.textField.setText(this.textField.getText());
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         } else {
             setContentDisplay(ContentDisplay.TEXT_ONLY);
@@ -58,7 +58,7 @@ public class GradeCell extends ListCell<Grade> {
     @Override
     public void startEdit() {
         super.startEdit();
-        this.textField.setText(getItem().getValue() + "");
+        this.textField.setText(this.getGradeText());
         setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         this.textField.requestFocus();
         this.textField.selectAll();
@@ -67,7 +67,11 @@ public class GradeCell extends ListCell<Grade> {
     @Override
     public void cancelEdit() {
         super.cancelEdit();
-        setText(getItem().getValue() + "");
+        setText(this.getGradeText());
         setContentDisplay(ContentDisplay.TEXT_ONLY);
+    }
+    
+    private String getGradeText() {
+    	return String.format("%.2f", getItem().getValue());
     }
 }

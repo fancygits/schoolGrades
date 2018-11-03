@@ -23,8 +23,8 @@
           <Menu fx:id="dataMenu" text="_Data">
             <items>
               <MenuItem onAction="#addQuizGrade" text="Add _quiz" />
-                  <MenuItem text="Add _homework" />
-                  <MenuItem text="Add _exam" />
+                  <MenuItem onAction="#addHomeworkGrade" text="Add _homework" />
+                  <MenuItem onAction="#addExamGrade" text="Add _exam" />
             </items>
                <accelerator>
                   <KeyCodeCombination alt="DOWN" code="D" control="UP" meta="UP" shift="UP" shortcut="UP" />
