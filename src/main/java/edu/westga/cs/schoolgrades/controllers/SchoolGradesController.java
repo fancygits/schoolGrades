@@ -1,6 +1,6 @@
 package edu.westga.cs.schoolgrades.controllers;
 
-import java.math.BigDecimal;
+import java.text.DecimalFormat;
 
 import edu.westga.cs.schoolgrades.model.AverageGradingStrategy;
 import edu.westga.cs.schoolgrades.model.CompositeGrade;
@@ -11,12 +11,13 @@ import edu.westga.cs.schoolgrades.model.SumGradingStrategy;
 import edu.westga.cs.schoolgrades.model.WeightedGrade;
 import edu.westga.cs.schoolgrades.views.GradeCellFactory;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Menu;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
+import javafx.util.converter.NumberStringConverter;
 
 /**
  * Defines the controller for the SchoolGrades GUI
@@ -78,10 +79,14 @@ public class SchoolGradesController {
 	 */
 	@FXML
 	private void initialize() {
-		this.quizSubtotalField.textProperty().bind(this.quizProperty.asString("%.3f"));
-		this.homeworkSubtotalField.textProperty().bind(this.homeworkProperty.asString("%.3f"));
-		this.examSubtotalField.textProperty().bind(this.examProperty.asString("%.3f"));
-		this.finalGradeField.textProperty().bind(this.finalGradeProperty.asString("%.3f"));
+		this.quizSubtotalField.textProperty().bind(this.quizProperty.asString());
+		this.quizSubtotalField.setTextFormatter(new TextFormatter<>(new NumberStringConverter(new DecimalFormat("#.###"))));
+		this.homeworkSubtotalField.textProperty().bind(this.homeworkProperty.asString());
+		this.homeworkSubtotalField.setTextFormatter(new TextFormatter<>(new NumberStringConverter(new DecimalFormat("#.###"))));
+		this.examSubtotalField.textProperty().bind(this.examProperty.asString());
+		this.examSubtotalField.setTextFormatter(new TextFormatter<>(new NumberStringConverter(new DecimalFormat("#.###"))));
+		this.finalGradeField.textProperty().bind(this.finalGradeProperty.asString());
+		this.finalGradeField.setTextFormatter(new TextFormatter<>(new NumberStringConverter(new DecimalFormat("#.###"))));
 		this.quizzes.setCellFactory(new GradeCellFactory());
 		this.homeworks.setCellFactory(new GradeCellFactory());
 		this.exams.setCellFactory(new GradeCellFactory());
@@ -122,27 +127,22 @@ public class SchoolGradesController {
 	
 	@FXML
 	private void addQuizGrade() {
-		int newIndex = this.quizGrades.getGrades().size();
 		this.quizGrades.addGrade(new SimpleGrade(0));
 		this.setColumns();
-		this.quizzes.getSelectionModel().select(newIndex);
+		this.quizzes.getSelectionModel().select(this.quizGrades.getGrades().size() - 1);
 	}
 	
 	@FXML
 	private void addHomeworkGrade() {
-		int newIndex = this.homeworkGrades.getGrades().size();
 		this.homeworkGrades.addGrade(new SimpleGrade(0));
 		this.setColumns();
-		this.homeworks.getSelectionModel().select(newIndex);
+		this.homeworks.getSelectionModel().select(this.homeworkGrades.getGrades().size() - 1);
 	}	
 
 	@FXML
 	private void addExamGrade() {
-		int newIndex = this.examGrades.getGrades().size();
 		this.examGrades.addGrade(new SimpleGrade(0));
 		this.setColumns();
-		this.exams.getSelectionModel().select(newIndex);
+		this.exams.getSelectionModel().select(this.examGrades.getGrades().size() - 1);
 	}
-	//TODO look into having new Grade be selected and editing
-	
 }
