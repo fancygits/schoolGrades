@@ -49,5 +49,12 @@ class TestAverageGradingStrategyCalculateGrade {
 		AverageGradingStrategy averageStrategy = new AverageGradingStrategy();
 		assertEquals(0, averageStrategy.calculateGrade(zeroGrade));
 	}
+	
+	@Test
+	void shouldNotAllowNullGrades() {
+		ArrayList<Grade> nullGrade = null;
+		AverageGradingStrategy averageStrategy = new AverageGradingStrategy();
+		assertThrows(IllegalArgumentException.class, () -> averageStrategy.calculateGrade(nullGrade));
+	}
 
 }

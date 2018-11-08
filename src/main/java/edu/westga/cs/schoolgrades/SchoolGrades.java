@@ -15,8 +15,7 @@ import javafx.stage.Stage;
  * @version 2018.10.30
  */
 public class SchoolGrades extends Application {
-	//TODO Move the view back and fix this line
-	private static final String GUI_RESOURCE = "edu/westga/cs/schoolgrades/controllers/SchoolGrades.fxml";
+	private static final String GUI_RESOURCE = "edu/westga/cs/schoolgrades/views/SchoolGrades.fxml";
 	
     @Override
     public void start(Stage primaryStage) throws Exception {

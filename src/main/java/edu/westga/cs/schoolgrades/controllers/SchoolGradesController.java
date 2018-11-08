@@ -71,7 +71,7 @@ public class SchoolGradesController {
 		this.finalGrade.addGrade(new WeightedGrade(this.homeworkGrades, 0.3));
 		this.finalGrade.addGrade(new WeightedGrade(this.examGrades, 0.5));
 		this.finalGradeProperty = new SimpleDoubleProperty(0);
-		//this.addDummyGrades();
+		this.addDummyGrades();
 	}
 	
 	/**
@@ -80,13 +80,13 @@ public class SchoolGradesController {
 	@FXML
 	private void initialize() {
 		this.quizSubtotalField.textProperty().bind(this.quizProperty.asString());
-		this.quizSubtotalField.setTextFormatter(new TextFormatter<>(new NumberStringConverter(new DecimalFormat("0.###"))));
+		this.quizSubtotalField.setTextFormatter(new TextFormatter<>(new NumberStringConverter(new DecimalFormat("#.###"))));
 		this.homeworkSubtotalField.textProperty().bind(this.homeworkProperty.asString());
-		this.homeworkSubtotalField.setTextFormatter(new TextFormatter<>(new NumberStringConverter(new DecimalFormat("0.###"))));
+		this.homeworkSubtotalField.setTextFormatter(new TextFormatter<>(new NumberStringConverter(new DecimalFormat("#.###"))));
 		this.examSubtotalField.textProperty().bind(this.examProperty.asString());
-		this.examSubtotalField.setTextFormatter(new TextFormatter<>(new NumberStringConverter(new DecimalFormat("0.###"))));
+		this.examSubtotalField.setTextFormatter(new TextFormatter<>(new NumberStringConverter(new DecimalFormat("#.###"))));
 		this.finalGradeField.textProperty().bind(this.finalGradeProperty.asString());
-		this.finalGradeField.setTextFormatter(new TextFormatter<>(new NumberStringConverter(new DecimalFormat("0.###"))));
+		this.finalGradeField.setTextFormatter(new TextFormatter<>(new NumberStringConverter(new DecimalFormat("#.###"))));
 		this.quizzes.setCellFactory(new GradeCellFactory());
 		this.homeworks.setCellFactory(new GradeCellFactory());
 		this.exams.setCellFactory(new GradeCellFactory());

@@ -46,8 +46,15 @@ class TestSumGradingStrategyCalculateGrade {
 	@Test
 	void shouldCalculateEmptyGradesAs0() {
 		ArrayList<Grade> zeroGrade = new ArrayList<Grade>();
-		AverageGradingStrategy averageStrategy = new AverageGradingStrategy();
-		assertEquals(0, averageStrategy.calculateGrade(zeroGrade));
+		SumGradingStrategy sumStrategy = new SumGradingStrategy();
+		assertEquals(0, sumStrategy.calculateGrade(zeroGrade));
+	}
+	
+	@Test
+	void shouldNotAllowNullGrades() {
+		ArrayList<Grade> nullGrade = null;
+		SumGradingStrategy sumStrategy = new SumGradingStrategy();
+		assertThrows(IllegalArgumentException.class, () -> sumStrategy.calculateGrade(nullGrade));
 	}
 
 }
