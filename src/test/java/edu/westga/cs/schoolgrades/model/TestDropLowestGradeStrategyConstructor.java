@@ -100,10 +100,10 @@ class TestDropLowestGradeStrategyConstructor {
 	}
 	
 	@Test
-	void cannotDropGradeWhenNoGradesInCompositeGrade() {
+	void cannotDropGradeWhenNoGradesInCompositeGradeShouldReturn0() {
 		CompositeGrade noGrade = new CompositeGrade();
 		noGrade.setGradingStrategy(new DropLowestGradeStrategy(new AverageGradingStrategy()));
-		assertThrows(IllegalArgumentException.class, () -> noGrade.getValue());
+		assertEquals(0, noGrade.getValue());
 	}
 	
 	@Test
