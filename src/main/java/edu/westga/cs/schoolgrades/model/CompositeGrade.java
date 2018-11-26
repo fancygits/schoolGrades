@@ -1,63 +1,52 @@
 package edu.westga.cs.schoolgrades.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * Defines the CompositeGrade class, allowing SimpleGrades and other CompositeGrades
+ * A {@link Grade} representing the aggregation of several other grades. Uses a {@link GradeCalculationStrategy} to determine
+ * the calculation for the aggregate score.
  * 
- * @author James Luke Johnson
- * @version 2018.10.23
+ * @author lewisb
+ *
  */
 public class CompositeGrade implements Grade {
 
-	private ArrayList<Grade> gradeList;
-	private CompositeGradingStrategy gradingStrategy;
+	private final GradeCalculationStrategy strategy;
+	private final List<Grade> childGrades;
 	
 	/**
-	 * Constructs a CompositeGrade object and adds another Grade object to it.
-	 * @param grade	The grade to add at construction
+	 * Creates a new CompositeGrade using the given strategy.
+	 * 
+	 * @param strategy the strategy to use for grade calculation. Must not be null.
 	 */
-	public CompositeGrade(Grade grade) {
-		this();
+	public CompositeGrade(GradeCalculationStrategy strategy) {
+		if (strategy == null) {
+			throw new IllegalArgumentException("strategy must not be null");
+		}
+		
+		this.strategy = strategy;
+		this.childGrades = new ArrayList<Grade>();
+	}
+	
+	/**
+	 * Adds a {@link Grade} to this CompositeGrade.
+	 * 
+	 * @param grade the grade to add. Must not be null and must not already exist in this CompositeGrade
+	 */
+	public void add(final Grade grade) {
 		if (grade == null) {
-			throw new IllegalArgumentException("Grades cannot be null");
+			throw new IllegalArgumentException("grade can not be null");
 		}
-		this.gradeList.add(grade);
-	}
-	
-	/**
-	 * Constructs an empty CompositeGrade object
-	 * Assigns the default CompositeGradingStrategy
-	 */
-	public CompositeGrade() {
-		this.gradeList = new ArrayList<Grade>();
-		this.gradingStrategy = new SumGradingStrategy();
-	}
-	
-	/**
-	 * Adds a Grade to the CompositeGrade
-	 * @param grade	The Grade to add
-	 */
-	public void addGrade(Grade grade) {
-		if (grade == null) {
-			throw new IllegalArgumentException("Grades cannot be null");
+		
+		if (childGrades.contains(grade)) {
+			throw new IllegalArgumentException("can not add the same grade twice");
 		}
-		if (this.gradeList.contains(grade)) {
-			throw new IllegalArgumentException("Cannot add the same grade twice");
-		}
-		this.gradeList.add(grade);
-	}
-	
-	/**
-	 * Getter for a Grade object at the given index
-	 * @param gradeIndex	Index of the Grade
-	 * @return				The Grade at that index
-	 */
-	public Grade getGrade(int gradeIndex) {
-		return (Grade) this.gradeList.get(gradeIndex);
+		
+		childGrades.add(grade);
 	}
 	
 	/**
@@ -65,24 +54,28 @@ public class CompositeGrade implements Grade {
 	 * 
 	 * @return all contained grades
 	 */
-	public ObservableList<Grade> getGrades() {
-		return FXCollections.observableArrayList(this.gradeList);
-	}
-	
-	/**
-	 * Sets a new CompositeGradingStrategy
-	 * @param strategy	The strategy to set
-	 */
-	public void setGradingStrategy(CompositeGradingStrategy strategy) {
-		if (strategy == null) {
-			throw new IllegalArgumentException("Strategy cannot be null");
-		}
-		this.gradingStrategy = strategy;
+	public List<Grade> getGrades() {
+		return Collections.unmodifiableList(childGrades);
 	}
 	
 	@Override
 	public double getValue() {
-		return this.gradingStrategy.calculateGrade(this.gradeList);
+		return strategy.calculate(childGrades);
+	}
+
+	/**
+	 * Convenience method to add all grades in the list.
+	 * 
+	 * @param grades the list of grades to add. Will not allow duplicates or nulls inside the list.
+	 */
+	public void addAll(List<? extends Grade> grades) {
+		if (grades == null) {
+			throw new IllegalArgumentException("grades can not be null");
+		}
+		
+		for (Grade grade: grades) {
+			this.add(grade);
+		}
 	}
 
 }

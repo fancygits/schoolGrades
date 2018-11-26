@@ -1,35 +1,23 @@
 package edu.westga.cs.schoolgrades.model;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
-/**
- * Tests the constructor of CompositeGrade
- * 
- * @author James Luke Johnson
- * @version 2018.10.23
- */
-class TestCompositeGradeConstructor {
+public class TestCompositeGradeConstructor {
 
+	
+	
 	@Test
-	void shouldAdd1SimpleGradeAtConstruction() {
-		CompositeGrade project1 = new CompositeGrade(new SimpleGrade(80));
-		assertEquals(80, project1.getGrade(0).getValue());
-		assertThrows(IndexOutOfBoundsException.class, () -> project1.getGrade(1));
+	public void shouldNotAllowNullStrategy() {
+		assertThrows(IllegalArgumentException.class, () ->{ 
+			new CompositeGrade(null);
+		});
 	}
 	
 	@Test
-	void shouldAddACompositeGradeContainingASimpleGradeAtConstruction() {
-		CompositeGrade project2 = new CompositeGrade(new CompositeGrade(new SimpleGrade(79)));
-		assertEquals(79, project2.getGrade(0).getValue());
-	}
-	
-	@Test
-	void shouldNotAllowNullGrades() {
-		assertThrows(IllegalArgumentException.class, () -> new CompositeGrade(null));
-		
+	public void shouldHaveNoGradesWhenCreated() {
+		CompositeGrade grade = new CompositeGrade(new SumOfGradesStrategy());
+		assertTrue(grade.getGrades().isEmpty());
 	}
 
 }
