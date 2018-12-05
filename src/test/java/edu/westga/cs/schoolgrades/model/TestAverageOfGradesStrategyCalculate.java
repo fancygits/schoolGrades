@@ -1,6 +1,5 @@
 package edu.westga.cs.schoolgrades.model;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.mock;
@@ -11,10 +10,6 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-
-
-
 
 public class TestAverageOfGradesStrategyCalculate {
 
@@ -29,42 +24,42 @@ public class TestAverageOfGradesStrategyCalculate {
 	
 	@BeforeEach
 	public void setup() {
-		mockGrade0 = mock(Grade.class);
-		when(mockGrade0.getValue()).thenReturn(10.0);
-		mockGrade1 = mock(Grade.class);
-		when(mockGrade1.getValue()).thenReturn(20.0);
-		mockGrade2 = mock(Grade.class);
-		when(mockGrade2.getValue()).thenReturn(30.0);
+		this.mockGrade0 = mock(Grade.class);
+		when(this.mockGrade0.getValue()).thenReturn(10.0);
+		this.mockGrade1 = mock(Grade.class);
+		when(this.mockGrade1.getValue()).thenReturn(20.0);
+		this.mockGrade2 = mock(Grade.class);
+		when(this.mockGrade2.getValue()).thenReturn(30.0);
 		
-		grades = new ArrayList<Grade>();
+		this.grades = new ArrayList<Grade>();
 		
-		strategy = new AverageOfGradesStrategy();
+		this.strategy = new AverageOfGradesStrategy();
 	}
 	
 	@Test
 	public  void shouldNotAllowNullGradesList() {
-		assertThrows(IllegalArgumentException.class, () ->{ 
-			strategy.calculate(null);
+		assertThrows(IllegalArgumentException.class, () -> { 
+			this.strategy.calculate(null);
 		});
 	}
 	
 	@Test
 	public void shouldGiveZeroIfNoGrades() {
-		assertEquals(0, strategy.calculate(grades), DELTA);
+		assertEquals(0, this.strategy.calculate(this.grades), DELTA);
 	}
 	
 	@Test
 	public void shouldCalculateAverageOfOneGrades() {
-		grades.add(mockGrade0);
-		assertEquals(mockGrade0.getValue(), strategy.calculate(grades), DELTA);
+		this.grades.add(this.mockGrade0);
+		assertEquals(this.mockGrade0.getValue(), this.strategy.calculate(this.grades), DELTA);
 	}
 
 	@Test
 	public void shouldCalculateSumOManyGrades() {
-		grades.add(mockGrade0);
-		grades.add(mockGrade1);
-		grades.add(mockGrade2);
-		assertEquals(20, strategy.calculate(grades), DELTA);
+		this.grades.add(this.mockGrade0);
+		this.grades.add(this.mockGrade1);
+		this.grades.add(this.mockGrade2);
+		assertEquals(20, this.strategy.calculate(this.grades), DELTA);
 	}
 
 }

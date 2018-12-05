@@ -8,11 +8,9 @@ import org.junit.jupiter.api.Test;
 
 public class TestCompositeGradeConstructor {
 
-	
-	
 	@Test
 	public void shouldNotAllowNullStrategy() {
-		assertThrows(IllegalArgumentException.class, () ->{ 
+		assertThrows(IllegalArgumentException.class, () -> { 
 			new CompositeGrade(null);
 		});
 	}

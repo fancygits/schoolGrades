@@ -1,10 +1,13 @@
 package edu.westga.cs.schoolgrades.model;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -18,70 +21,69 @@ public class TestCompositeGradeAddAll {
 	
 	@BeforeEach
 	public void setup() {
-		composite = new CompositeGrade(mock(GradeCalculationStrategy.class));
-		mockGrade0 = mock(Grade.class);
-		mockGrade1 = mock(Grade.class);
-		mockGrade2 = mock(Grade.class);
-		list = new ArrayList<Grade>();
+		this.composite = new CompositeGrade(mock(GradeCalculationStrategy.class));
+		this.mockGrade0 = mock(Grade.class);
+		this.mockGrade1 = mock(Grade.class);
+		this.mockGrade2 = mock(Grade.class);
+		this.list = new ArrayList<Grade>();
 	}
-	
 
 	@Test
 	public void shouldNotAddNullGradesList() {
-		assertThrows(IllegalArgumentException.class, () ->{ 
-			composite.addAll(null);
+		assertThrows(IllegalArgumentException.class, () -> { 
+			this.composite.addAll(null);
 		});
 	}
 	
 	@Test
 	public void shouldAddEmptyList() {
-		composite.addAll(new ArrayList<Grade>());
-		assertTrue(composite.getGrades().isEmpty());
+		this.composite.addAll(new ArrayList<Grade>());
+		assertTrue(this.composite.getGrades().isEmpty());
 	}
 	
 	@Test
 	public void shouldAddOneElementList() {
-		list.add(mockGrade0);
-		composite.addAll(list);
-		List<Grade> actual = composite.getGrades();
+		this.list.add(this.mockGrade0);
+		this.composite.addAll(this.list);
+		List<Grade> actual = this.composite.getGrades();
 		assertEquals(1, actual.size());
-		assertEquals(mockGrade0, actual.get(0));
+		assertEquals(this.mockGrade0, actual.get(0));
 	}
 	
 	@Test
 	public void shouldAddManyElementsList() {
-		list.add(mockGrade0);
-		list.add(mockGrade1);
-		list.add(mockGrade2);
-		composite.addAll(list);
-		List<Grade> actual = composite.getGrades();
+		this.list.add(this.mockGrade0);
+		this.list.add(this.mockGrade1);
+		this.list.add(this.mockGrade2);
+		this.composite.addAll(this.list);
+		List<Grade> actual = this.composite.getGrades();
 		assertEquals(3, actual.size());
-		assertEquals(mockGrade0, actual.get(0));
-		assertEquals(mockGrade1, actual.get(1));
-		assertEquals(mockGrade2, actual.get(2));
+		assertEquals(this.mockGrade0, actual.get(0));
+		assertEquals(this.mockGrade1, actual.get(1));
+		assertEquals(this.mockGrade2, actual.get(2));
 	}
 
 	@Test
 	public void shouldNotAddListWithDuplicates() {
-		list.add(mockGrade0);
-		list.add(mockGrade1);
-		list.add(mockGrade0);
-		list.add(mockGrade2);
+		this.list.add(this.mockGrade0);
+		this.list.add(this.mockGrade1);
+		this.list.add(this.mockGrade0);
+		this.list.add(this.mockGrade2);
 		
-		assertThrows(IllegalArgumentException.class, () ->{ 
-			composite.addAll(list);
+		assertThrows(IllegalArgumentException.class, () -> { 
+			this.composite.addAll(this.list);
 		});
 	}
 	
 	@Test
 	public void shouldNotAddListThatDuplicatesExistingGrades() {
-		composite.add(mockGrade1);
-		list.add(mockGrade1);
-		list.add(mockGrade0);
-		list.add(mockGrade2);
+		this.composite.add(this.mockGrade1);
+		this.list.add(this.mockGrade1);
+		this.list.add(this.mockGrade0);
+		this.list.add(this.mockGrade2);
 		
-		assertThrows(IllegalArgumentException.class, () ->{ 
-			composite.addAll(list);
+		assertThrows(IllegalArgumentException.class, () -> { 
+			this.composite.addAll(this.list);
 		});
 	}
 }

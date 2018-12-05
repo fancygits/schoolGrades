@@ -1,7 +1,9 @@
 package edu.westga.cs.schoolgrades.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -13,26 +15,26 @@ public class TestWeightedGradeGetValue {
 	
 	@BeforeEach
 	public void setup() {
-		mockGrade = mock(Grade.class);
-		when(mockGrade.getValue()).thenReturn(100.00);
+		this.mockGrade = mock(Grade.class);
+		when(this.mockGrade.getValue()).thenReturn(100.00);
 	}
 	
 	@Test
 	public void shouldApplyZeroWeight() {
-		weightedGrade = new WeightedGrade(mockGrade, 0);
-		assertEquals(0, weightedGrade.getValue(), DELTA);
+		this.weightedGrade = new WeightedGrade(this.mockGrade, 0);
+		assertEquals(0, this.weightedGrade.getValue(), DELTA);
 	}
 	
 	@Test
 	public void shouldApplyWeightOfOne() {
-		weightedGrade = new WeightedGrade(mockGrade, 1);
-		assertEquals(100, weightedGrade.getValue(), DELTA);
+		this.weightedGrade = new WeightedGrade(this.mockGrade, 1);
+		assertEquals(100, this.weightedGrade.getValue(), DELTA);
 	}
 	
 	@Test
 	public void shouldApplyWeightBetweenZeroAndOne() {
-		weightedGrade = new WeightedGrade(mockGrade, 0.5);
-		assertEquals(50, weightedGrade.getValue(), DELTA);
+		this.weightedGrade = new WeightedGrade(this.mockGrade, 0.5);
+		assertEquals(50, this.weightedGrade.getValue(), DELTA);
 	}
 
 }
