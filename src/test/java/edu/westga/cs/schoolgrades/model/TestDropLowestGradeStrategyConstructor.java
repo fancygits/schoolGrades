@@ -93,17 +93,17 @@ class TestDropLowestGradeStrategyConstructor {
 	}
 	
 	@Test
-	void cannotDropGradeWhenOnlyOneGradeInCompositeGrade() {
+	void cannotDropGradeWhenOnlyOneGradeInCompositeGradeReturnsChildStrategyInstead() {
 		CompositeGrade oneGrade = new CompositeGrade(new SimpleGrade(99));
 		oneGrade.setGradingStrategy(new DropLowestGradeStrategy(new AverageGradingStrategy()));
-		assertThrows(UnsupportedOperationException.class, () -> oneGrade.getValue());
+		assertEquals(99, oneGrade.getValue());
 	}
 	
 	@Test
-	void cannotDropGradeWhenNoGradesInCompositeGrade() {
+	void cannotDropGradeWhenNoGradesInCompositeGradeShouldReturn0() {
 		CompositeGrade noGrade = new CompositeGrade();
 		noGrade.setGradingStrategy(new DropLowestGradeStrategy(new AverageGradingStrategy()));
-		assertThrows(UnsupportedOperationException.class, () -> noGrade.getValue());
+		assertEquals(0, noGrade.getValue());
 	}
 	
 	@Test

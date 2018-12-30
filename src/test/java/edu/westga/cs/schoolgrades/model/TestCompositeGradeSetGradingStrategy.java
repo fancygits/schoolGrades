@@ -37,13 +37,13 @@ class TestCompositeGradeSetGradingStrategy {
 	}
 	
 	@Test
-	void shouldNotCalculateEmptyCompositeGrades() {
+	void shouldCalculateEmptyCompositeGradesAs0() {
 		CompositeGrade emptyGrade = new CompositeGrade();
-		assertThrows(IllegalArgumentException.class, () -> emptyGrade.getValue());
+		assertEquals(0, emptyGrade.getValue());
 		emptyGrade.setGradingStrategy(new AverageGradingStrategy());
-		assertThrows(IllegalArgumentException.class, () -> emptyGrade.getValue());
+		assertEquals(0, emptyGrade.getValue());
 		emptyGrade.setGradingStrategy(new SumGradingStrategy());
-		assertThrows(IllegalArgumentException.class, () -> emptyGrade.getValue());
+		assertEquals(0, emptyGrade.getValue());
 	}
 	
 	@Test

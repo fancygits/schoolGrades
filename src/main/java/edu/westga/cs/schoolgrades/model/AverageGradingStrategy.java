@@ -12,10 +12,13 @@ public class AverageGradingStrategy implements CompositeGradingStrategy {
 
 	@Override
 	public double calculateGrade(ArrayList<Grade> grades) {
-		if (grades.size() == 0 || grades == null) {
-			throw new IllegalArgumentException("There are no grades to calculate.");
+		if (grades == null) {
+			throw new IllegalArgumentException("Grade cannot be null");
+		} else if (grades.size() == 0) {
+			return 0;
+		} else {
+			return new SumGradingStrategy().calculateGrade(grades) / grades.size();
 		}
-		return new SumGradingStrategy().calculateGrade(grades) / grades.size();
 	}
 
 }

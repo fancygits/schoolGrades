@@ -12,14 +12,17 @@ public class SumGradingStrategy implements CompositeGradingStrategy {
 	
 	@Override
 	public double calculateGrade(ArrayList<Grade> grades) {
-		if (grades.size() == 0 || grades == null) {
-			throw new IllegalArgumentException("There are no grades to calculate.");
+		if (grades == null) {
+			throw new IllegalArgumentException("Grade cannot be null");
+		} else if (grades.size() == 0) {
+			return 0;
+		} else {
+			double value = 0;
+			for (Grade grade : grades) {
+				value += grade.getValue();
+			}
+			return value;
 		}
-		double value = 0;
-		for (Grade grade : grades) {
-			value += grade.getValue();
-		}
-		return value;
 	}
 
 }

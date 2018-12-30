@@ -2,6 +2,9 @@ package edu.westga.cs.schoolgrades.model;
 
 import java.util.ArrayList;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 /**
  * Defines the CompositeGrade class, allowing SimpleGrades and other CompositeGrades
  * 
@@ -42,6 +45,9 @@ public class CompositeGrade implements Grade {
 		if (grade == null) {
 			throw new IllegalArgumentException("Grades cannot be null");
 		}
+		if (this.gradeList.contains(grade)) {
+			throw new IllegalArgumentException("Cannot add the same grade twice");
+		}
 		this.gradeList.add(grade);
 	}
 	
@@ -52,6 +58,15 @@ public class CompositeGrade implements Grade {
 	 */
 	public Grade getGrade(int gradeIndex) {
 		return (Grade) this.gradeList.get(gradeIndex);
+	}
+	
+	/**
+	 * Gets the {@link Grade}s contained in this CompositeGrade
+	 * 
+	 * @return all contained grades
+	 */
+	public ObservableList<Grade> getGrades() {
+		return FXCollections.observableArrayList(this.gradeList);
 	}
 	
 	/**

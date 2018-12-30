@@ -13,12 +13,12 @@ public class WeightedGrade extends GradeDecorator {
 	/**
 	 * Constructs a new WeightedGrade object
 	 * @param newGrade	The grade to apply weight to
-	 * @param weight	The weight to apply to the grade
+	 * @param weight	The weight to apply to the grade (0.0 - 1.0)
 	 */
 	public WeightedGrade(Grade newGrade, double weight) {
 		super(newGrade);
-		if (weight < 0) {
-			throw new IllegalArgumentException("Weights cannot be negative.");
+		if (weight < 0 || weight > 1) {
+			throw new IllegalArgumentException("Weight must be between 0.0 - 1.0");
 		}
 		this.weight = weight;
 	}

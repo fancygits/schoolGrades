@@ -37,5 +37,16 @@ public class SimpleGrade implements Grade {
 	public double getValue() {
 		return this.value;
 	}
-
+	
+	/**
+	 * Modifies the value of the SimpleGrade
+	 * 
+	 * @param newValue	The new Double value of the SimpleGrade	
+	 */
+	public void setValue(double newValue) {
+		if (newValue < 0) {
+			throw new IllegalArgumentException("SimpleGrade value must be greater than zero.");
+		}
+		this.value = newValue;
+	}
 }
